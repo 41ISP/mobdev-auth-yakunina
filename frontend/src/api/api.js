@@ -2,7 +2,7 @@ import axios from "axios";
 import { useUserStore } from "../store/useUserStore";
 
 const apiInstance = axios.create({
-    baseURL: "https://api.kitek-pg.ru/api/feedback/",
+    baseURL: "https://animated-space-memory-jj6r7gwr4qpqc5654-3001.app.github.dev/api",
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
@@ -38,10 +38,49 @@ const sendMessage = async (message) => {
 
 }
 
+const reportMessage = async (id) => {
+    const res = await apiInstance.post(`/messages/${id}/report`)
+    return res  
+}
+
+const getStats = async () => {
+    const res = await apiInstance.get("/stats")
+    return res 
+}
+
+const getMyMessage = async () => {
+    const res = await apiInstance.get(`/my-messages`)
+    return res
+
+}
+
+const deleteMessage = async (id) => {
+    const res = await apiInstance.delete(`/messages/${id}`)
+    return res
+
+}
+
+const likeMessage = async (id) => {
+    const res = await apiInstance.post(`/messages/${id}/like`)
+    return res
+
+}
+
+const authMe = async () => {
+    const res = await apiInstance.getUri("/auth/me")
+    return res
+
+}
 
 export const api = {
     registerUser,
     loginUser,
     getMessages,
+    reportMessage,
+    getMyMessage,
+    getStats,
+    deleteMessage,
+    likeMessage,
+    authMe,
     sendMessage 
 }
